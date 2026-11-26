@@ -50,6 +50,21 @@ git -C "$TMP/assets" sparse-checkout set "${SPARSE_PATHS[@]}"
 mkdir -p "$ROOT/public"
 rsync -a --ignore-existing "$TMP/assets/public/audio/" "$ROOT/public/audio/"
 
+# Topic-level music lives outside public/audio. Fetch just these blobs instead of
+# checking out the whole Topics tree (which also contains reference films).
+restore_file() {
+  local rel="$1"
+  if [[ -f "$ROOT/$rel" && "$FORCE" -eq 0 ]]; then
+    return
+  fi
+  mkdir -p "$ROOT/$(dirname "$rel")"
+  git -C "$TMP/assets" show "HEAD:$rel" > "$ROOT/$rel"
+}
+restore_file Topics/InThisTown/InThisTownMusic.aac
+restore_file Topics/ServerLore/up_happy.m4a
+restore_file Topics/ServerLore/up_sad.m4a
+restore_file Topics/Explainer/explainer_bgm_loop.wav
+
 if [[ "$WITH_REFERENCES" -eq 1 ]]; then
   for topic in InThisTown ServerLore Explainer; do
     if [[ -d "$TMP/assets/Topics/$topic/reference" ]]; then

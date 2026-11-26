@@ -44,9 +44,10 @@ bash scripts/restore-assets.sh
 ```
 
 That script does a shallow, blob-filtered sparse checkout of
-`Mellow048/kmanincraftghhj22` and copies `public/audio/` into this working tree.
-Use `--with-references` to also copy the three topics' reference films, or `--force`
-to refresh audio that is already present.
+`Mellow048/kmanincraftghhj22`, copies `public/audio/` into this working tree, and
+fetches the four topic-level music files (`InThisTownMusic.aac`, `up_happy.m4a`,
+`up_sad.m4a`, `explainer_bgm_loop.wav`). Use `--with-references` to also copy the
+three topics' reference films, or `--force` to refresh audio that is already present.
 
 Generated audio from `.github/workflows/tts.yml` can also be dropped into
 `public/audio/<composition>/` without restoring the old mix.
