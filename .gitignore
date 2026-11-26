@@ -9,3 +9,22 @@ out
 .DS_Store
 __pycache__
 .venv/
+
+# Code-only mirror: restored media and generated output must never be committed.
+*.mp4
+*.mov
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.zip
+renders/
+review/
+.cache-sheets/
+out/
