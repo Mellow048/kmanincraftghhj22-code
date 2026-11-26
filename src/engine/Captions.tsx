@@ -1,0 +1,151 @@
+import { useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useCurrentFrame, useVideoConfig } from "remotion";
+import * as THREE from "three";
+import { clamp01 } from "./math";
+import { beatFrames, captionBeat, captionPixel } from "./caption-beat";
+import { wordTexture } from "./pixelfont";
+import type { CaptionSettings, CaptionWord } from "./types";
+
+/**
+ * One word on screen at a time, cut to the voice.
+ *
+ * It is a quad drawn in screen space INSIDE the 3D canvas (same WebGL context,
+ * no HTML layer), so it survives every renderer the film does. The letters come
+ * from a bit table (pixelfont.ts), so no font has to be installed anywhere.
+ *
+ * Films do not mount this. Pass `captions` to defineFilm.
+ */
+
+const VERT = /* glsl */ `
+  uniform vec4 rect; // centre x, centre y, half width, half height — all in clip space
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = vec4(rect.xy + position.xy * rect.zw, 0.0, 1.0);
+  }
+`;
+
+const FRAG = /* glsl */ `
+  uniform sampler2D map;
+  uniform vec3 accent;
+  varying vec2 vUv;
+  void main() {
+    vec4 c = texture2D(map, vUv);
+    if (c.a < 0.5) discard;
+    vec3 tint = (c.r > 0.5 && c.g > 0.5 && c.b > 0.5) ? c.rgb * accent : c.rgb;
+    gl_FragColor = vec4(tint, 1.0);
+  }
+`;
+
+/** What a word looks like on screen: no punctuation, one case. */
+export function captionText(word: string, letterCase: "upper" | "lower" = "upper"): string {
+  const clean = word.replace(/[^A-Za-z0-9'\-]/g, "").replace(/^['-]+|['-]+$/g, "");
+  return letterCase === "upper" ? clean.toUpperCase() : clean.toLowerCase();
+}
+
+/** The word being spoken at `t`, or null in a pause. */
+export function activeWord(words: CaptionWord[], t: number): CaptionWord | null {
+  let lo = 0;
+  let hi = words.length - 1;
+  let hit = -1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (words[mid].s <= t) {
+      hit = mid;
+      lo = mid + 1;
+    } else hi = mid - 1;
+  }
+  if (hit < 0) return null;
+  const word = words[hit];
+  const next = words[hit + 1];
+  // Hold the word until the next one starts, but not across a real pause.
+  const holdUntil = next ? Math.min(next.s, word.e + 0.45) : word.e + 0.45;
+  return t < holdUntil ? word : null;
+}
+
+export const Captions: React.FC<CaptionSettings> = ({
+  words,
+  y = 0.72,
+  size = 1,
+  letterCase = "upper",
+  motion,
+  accentColor = "#ffd84d",
+  highlightWords,
+  dangerColor = "#ff4f42",
+  dangerWords,
+  wordColors,
+}) => {
+  const frame = useCurrentFrame();
+  const { fps, width, height } = useVideoConfig();
+  const t = frame / fps;
+
+  const colorLookup = useMemo(() => {
+    const map = new Map<string, string>();
+    if (highlightWords) {
+      for (const w of highlightWords) map.set(captionText(w, letterCase), accentColor);
+    }
+    if (dangerWords) {
+      for (const w of dangerWords) map.set(captionText(w, letterCase), dangerColor);
+    }
+    if (wordColors) {
+      for (const [w, hex] of Object.entries(wordColors)) map.set(captionText(w, letterCase), hex);
+    }
+    return map;
+  }, [highlightWords, accentColor, dangerWords, dangerColor, wordColors, letterCase]);
+
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        uniforms: {
+          map: { value: null },
+          rect: { value: new THREE.Vector4(0, 0, 0, 0) },
+          accent: { value: new THREE.Color("#ffffff") },
+        },
+        vertexShader: VERT,
+        fragmentShader: FRAG,
+        transparent: true,
+        depthTest: false,
+        depthWrite: false,
+        fog: false,
+        toneMapped: false,
+      }),
+    [],
+  );
+
+  const starts = useMemo(() => motion === "on-beat" ? beatFrames(words, fps) : null, [motion, words, fps]);
+  const beat = starts ? captionBeat(words, starts, frame, fps) : null;
+  const word = motion === "on-beat" ? beat?.word : activeWord(words, t);
+  const text = word ? captionText(word.w, letterCase) : "";
+
+  let rect: [number, number, number, number] | null = null;
+  let tex: THREE.DataTexture | null = null;
+  if (word && text.length > 0) {
+    tex = wordTexture(text);
+    const texW = (tex.image as { width: number }).width;
+    const texH = (tex.image as { height: number }).height;
+    // One font pixel is 1/86 of the frame width; long words shrink to fit 88%.
+    const px = captionPixel(width, texW, size, !!beat);
+    // A two-frame pop on the cut to each word. It is what makes the eye follow.
+    const pop = beat?.scale ?? (1 + 0.2 * Math.pow(1 - clamp01((t - word.s) / 0.1), 2));
+    const halfW = ((texW * px) / width) * pop;
+    const halfH = ((texH * px) / height) * pop;
+    rect = [0, 1 - 2 * (y - (beat?.lift ?? 0)), halfW, halfH];
+  }
+
+  const wordHex = (text.length > 0 && colorLookup.get(text)) || "#ffffff";
+
+  useFrame(() => {
+    if (rect && tex) {
+      material.uniforms.map.value = tex;
+      (material.uniforms.rect.value as THREE.Vector4).set(rect[0], rect[1], rect[2], rect[3]);
+      (material.uniforms.accent.value as THREE.Color).set(wordHex);
+    }
+  });
+
+  return (
+    <mesh frustumCulled={false} renderOrder={9999} visible={rect !== null} material={material}>
+      <planeGeometry args={[2, 2]} />
+    </mesh>
+  );
+};

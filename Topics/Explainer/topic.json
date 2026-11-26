@@ -1,0 +1,112 @@
+{
+  "id": "explainer",
+  "name": "Explainer",
+  "folder": "Topics/Explainer",
+  "profile": "story",
+  "state": "MEASURED",
+  "reference": {
+    "film": "napoleon-explained-using-minecraft",
+    "page": "Topics/Explainer/reference/napoleon/README.md",
+    "secondReference": "Topics/Explainer/reference/minimum-wage/README.md",
+    "playbook": "Topics/Explainer/STUDY-NAPOLEON-EXPLAINER.md",
+    "owner": "replace/remaster explainer to match Napoleon & Minimum Wage references: 2 signature leads (not InThisTown default hero), detailed composite props, fast story cuts, mandatory explainer_bgm_loop.wav under narration, and seamless loop payoff"
+  },
+  "measuredFromReference": {
+    "seconds": 80.93,
+    "shots": 44,
+    "cutsPerSecond": 0.54,
+    "medianShotSeconds": 1.67,
+    "meanShotSeconds": 1.84,
+    "words": 286,
+    "wordsPerMinute": 212,
+    "secondReferenceMinimumWage": {
+      "seconds": 78.79,
+      "shots": 36,
+      "medianShotSeconds": 2.12,
+      "words": 279,
+      "wordsPerMinute": 212
+    }
+  },
+  "castRule": {
+    "distinctChannel": true,
+    "leads": ["CitizenLead (Miles - struggling/mistake-maker)", "EliteLead (Sterling - rich/perfect/authority)"],
+    "note": "Explainer runs on a separate channel from InThisTown. Always use CitizenLead + EliteLead (+ Official/ExplainerCrowd), never InThisTown Hero or Villager clones."
+  },
+  "camera": {
+    "builder": "storyScene",
+    "guard": "",
+    "maxHardCuts": 999,
+    "legacyFlightFilms": ["what-is-a-dictator"],
+    "note": "Remastered Explainer uses storyScene() with fast ~1.5-2.0s cuts across grounded multi-zone sets, dynamic cam.* recipes, and intra-line `cut:` switches. Legacy film `what-is-a-dictator` stays checked as a flightScene."
+  },
+  "film": {
+    "seconds": [55, 110],
+    "hardMaxSeconds": 170,
+    "hardMinSeconds": 35,
+    "hardMinWords": 100,
+    "shotSeconds": [0.4, 5.5],
+    "medianShotSeconds": [1.1, 2.1],
+    "wordsPerMinute": [205, 255],
+    "words": [180, 420],
+    "maxWordsPerShot": 16,
+    "captions": true,
+    "loopRecommended": true
+  },
+  "cuts": {
+    "short": {
+      "seconds": [35, 65],
+      "hardMaxSeconds": 68,
+      "words": [110, 230]
+    },
+    "long": {
+      "seconds": [110, 168],
+      "hardMaxSeconds": 175,
+      "words": [400, 650]
+    }
+  },
+  "pack": "Topics/Explainer/PACK.md",
+  "template": "Topics/Explainer/template",
+  "models": {
+    "napoleon": "Topics/Explainer/reference/napoleon/README.md (target pacing, 2-lead contrast, composite props, and loop payoff)",
+    "minimum-wage": "Topics/Explainer/reference/minimum-wage/README.md (3-option visual breakdown, twin before/after chests, balanced trade-off dilemma loop)"
+  },
+  "sound": {
+    "required": true,
+    "guide": "Topics/Explainer/SOUND.md",
+    "music": {
+      "file": "Topics/Explainer/explainer_bgm_loop.wav",
+      "owner": "mandatory background music for every Explainer short, levelled quietly under narration so it never overpowers the voice",
+      "since": "2026-11-25",
+      "guide": "Topics/Explainer/SOUND.md",
+      "gain": -19,
+      "minShare": 0.85,
+      "madeBefore": ["what-is-a-dictator"],
+      "note": "MANDATORY for every new Explainer: track = Topics/Explainer/explainer_bgm_loop.wav. Start gain at -19 (kept 17-25 dB below the narrator voice so it NEVER overpowers narration). scripts/sound.py build refuses any new Explainer sheet that omits it."
+    },
+    "minMusicSections": 3,
+    "musicUnderVoiceDb": [17, 25],
+    "maxSecondsWithoutMusic": 4,
+    "minSfxPerMinute": 40,
+    "maxGapSeconds": 6,
+    "maxBuried": 0,
+    "minVoiceOverRestDb": 3,
+    "minVoiceOverRestMedianDb": 10,
+    "lufs": [-16.5, -13],
+    "maxTruePeakDb": -0.3,
+    "bedDefault": "sky",
+    "moodDefault": "explain",
+    "bedForLook": {
+      "overworld-night": "night"
+    },
+    "bedForZone": {
+      "room": "room",
+      "hall": "room",
+      "council": "room",
+      "throne": "room",
+      "bank": "room",
+      "shop": "room",
+      "cave": "cave",
+      "mine": "cave"
+    }
+  }
+}

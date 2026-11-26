@@ -1,0 +1,75 @@
+name: Render code-only film
+
+# Render a film from this code-only mirror. Media is restored from the source
+# repository at run time and the MP4 is uploaded as an artifact; nothing is
+# committed back, so this repository stays small.
+
+on:
+  workflow_dispatch:
+    inputs:
+      composition:
+        description: "Remotion composition id (e.g. in-this-town-we-live-at-the-bottom)"
+        required: true
+      frames:
+        description: "Optional frame range for a review clip, e.g. 0-140"
+        required: false
+        default: ""
+      concurrency:
+        description: "Remotion concurrency (2 is safe on software GL)"
+        required: false
+        default: "2"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Cache source audio
+        uses: actions/cache@v4
+        with:
+          path: public/audio
+          key: kman-audio-v1
+
+      - run: npm ci
+
+      - name: Restore media assets
+        run: bash scripts/restore-assets.sh
+
+      - name: Verify
+        env:
+          COMPOSITION: ${{ inputs.composition }}
+        run: npm run typecheck && npm run check && npm run test:direction && npm run rehearse -- "$COMPOSITION" --pre-render
+
+      - name: Render
+        env:
+          COMPOSITION: ${{ inputs.composition }}
+          CONCURRENCY: ${{ inputs.concurrency }}
+          FRAMES: ${{ inputs.frames }}
+        run: |
+          set -o pipefail
+          mkdir -p out
+          FRAME_FLAG=""
+          if [ -n "$FRAMES" ]; then FRAME_FLAG="--frames=$FRAMES"; fi
+          npx remotion render src/index.ts "$COMPOSITION" out/film.mp4 \
+            --codec=h264 --crf=20 --concurrency=$CONCURRENCY --gl=swangle --timeout=240000 $FRAME_FLAG \
+            2>&1 | tail -40
+
+      - name: Size
+        run: ls -la out/film.mp4 && (ffprobe -hide_banner out/film.mp4 2>&1 | head -6 || true)
+
+      - name: Upload film artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.composition }}-film
+          path: out/film.mp4
+          retention-days: 7

@@ -1,0 +1,185 @@
+{
+  "tool": "scripts/sound.py v1",
+  "film": "in-this-town-we-live-at-the-bottom",
+  "mix": "public/audio/in-this-town-we-live-at-the-bottom/mix.mp3",
+  "seconds": 157.4333,
+  "built_from": {
+    "timing.json": "868936860564bbf3dc19238002b8d20dc6d1a983",
+    "sound.json": "372d91892f5a1e5f1415ca63f5198ad7007a4b27",
+    "narration.mp3": "830e2c9db5931a3987104a20b657843b7e91f70b"
+  },
+  "mix_sha1": "d312d83c24d6be1b9a04fef8834832ae08f833b7",
+  "music_sections": [
+    {
+      "from": "1.town",
+      "mood": "town",
+      "at": 0.0
+    },
+    {
+      "from": "2.why",
+      "mood": "curious",
+      "at": 10.63
+    },
+    {
+      "from": "3.rods",
+      "mood": "town",
+      "at": 12.9
+    },
+    {
+      "from": "4.coin",
+      "mood": "curious",
+      "at": 32.57
+    },
+    {
+      "from": "5.two",
+      "mood": "sad",
+      "at": 41.9
+    },
+    {
+      "from": "6.basket",
+      "mood": "dark",
+      "at": 47.23
+    },
+    {
+      "from": "7.sick",
+      "mood": "drone",
+      "at": 56.03
+    },
+    {
+      "from": "7.gold",
+      "mood": "curious",
+      "at": 61.8
+    },
+    {
+      "from": "9.try",
+      "mood": "playful",
+      "at": 68.77
+    },
+    {
+      "from": "10.night",
+      "mood": "grind",
+      "at": 79.37
+    },
+    {
+      "from": "11.meet",
+      "mood": "hope",
+      "at": 89.47
+    },
+    {
+      "from": "12.q",
+      "mood": "curious",
+      "at": 99.47
+    },
+    {
+      "from": "13.steps",
+      "mood": "tense",
+      "at": 102.87
+    },
+    {
+      "from": "14.raise",
+      "mood": "dark",
+      "at": 114.0
+    },
+    {
+      "from": "14.shut",
+      "mood": "none",
+      "at": 121.43
+    },
+    {
+      "from": "15.street",
+      "mood": "sad",
+      "at": 126.0
+    },
+    {
+      "from": "16.jetty",
+      "mood": "hope",
+      "at": 131.03
+    },
+    {
+      "from": "17.cold",
+      "mood": "dark",
+      "at": 141.6
+    },
+    {
+      "from": "18.ate",
+      "mood": "sad",
+      "at": 148.13
+    },
+    {
+      "from": "18.jar",
+      "mood": "town",
+      "at": 151.23
+    }
+  ],
+  "music_file": {
+    "path": "Topics/InThisTown/InThisTownMusic.aac",
+    "sha1": "ac78c0596b68de45928fe2e3eb7d6179c70a8b8d"
+  },
+  "beds": 27,
+  "measured": {
+    "musicUnderVoiceDb": 17.4,
+    "secondsWithoutMusic": 5.0,
+    "bedsUnderVoiceDb": 25.4,
+    "sfx": 120,
+    "sfxPerMinute": 45.7,
+    "sfxKinds": 19,
+    "longestGapSeconds": 3.2,
+    "longestGapAt": 62.0,
+    "sfxBuried": 0,
+    "voiceOverRestMedianDb": 15.1,
+    "voiceOverRestWorstDb": 6.8,
+    "voiceOverRestWorst": [
+      {
+        "db": 6.8,
+        "t": 43.9,
+        "cue": "5.two",
+        "sounding": [
+          "chime"
+        ]
+      },
+      {
+        "db": 7.3,
+        "t": 142.1,
+        "cue": "17.cold",
+        "sounding": [
+          "sting"
+        ]
+      },
+      {
+        "db": 7.4,
+        "t": 141.4,
+        "cue": "16.year",
+        "sounding": [
+          "sting"
+        ]
+      },
+      {
+        "db": 7.5,
+        "t": 108.7,
+        "cue": "13.small",
+        "sounding": [
+          "drop"
+        ]
+      },
+      {
+        "db": 7.7,
+        "t": 64.1,
+        "cue": "7.gold",
+        "sounding": []
+      },
+      {
+        "db": 7.8,
+        "t": 79.2,
+        "cue": "9.laugh",
+        "sounding": [
+          "sting",
+          "whoosh"
+        ]
+      }
+    ],
+    "lufs": -14.8,
+    "truePeakDb": -2.2,
+    "limiterMaxDb": 1.1
+  },
+  "failures": []
+}
