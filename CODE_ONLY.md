@@ -77,3 +77,5 @@ in the job first if you use them.
   `Topics/Explainer/PACK.md` catalogue the available parts.
 - Each film has `SCRIPT.md`, `SHOTS.md`, and `SOUND.md` next to its source; start there.
 - `npm run typecheck`, `npm run check`, and `npm run test:direction` are the fast guards.
+- With no audio restored, `npm run check` reports missing mixes as notes instead of
+  failures. After `scripts/restore-assets.sh`, a missing or stale mix fails again.
