@@ -3,7 +3,8 @@
 This repository is a **code-only mirror** of
 [`Mellow048/kmanincraftghhj22`](https://github.com/Mellow048/kmanincraftghhj22),
 taken from `main` at commit `7a8aa4b` ("Remove stale DEEPSEEK-MASTERPROMPT.md token bloat"),
-after the **Remaster v3/v3.5** upgrade in `9f0dd5b`.
+after the **Remaster v3/v3.5** upgrade in `9f0dd5b`, plus the **v3.6 reference-study
+pass**.
 
 It exists so the full source can be read, edited, and remastered without moving the
 4.1 GB of tracked media in the original repository.
@@ -15,8 +16,8 @@ The three remaster targets are included in full:
 | Topic | Path | What is here |
 | --- | --- | --- |
 | In This Town | `Topics/InThisTown/` | Pack source, staging, characters, places, shots, sound notes, template |
-| Server Lore | `Topics/ServerLore/` | Pack source, cast, props, places, script, shots, sound notes, template |
-| Explainer | `Topics/Explainer/` | Pack source, cast, props, charts, money, stage, script, shots, sound notes, template |
+| Server Lore | `Topics/ServerLore/` | Pack source, cast, props, places, script, reference scripts, shots, sound notes, template |
+| Explainer | `Topics/Explainer/` | Pack source, cast, props, charts, money, stage, script, reference study, shots, sound notes, template |
 
 Every film under `src/videos/` that uses those packs is included too, along with the
 shared engine (`src/engine/`), scripts, tests, docs, and GitHub Actions workflows.
@@ -26,6 +27,17 @@ This snapshot includes the Remaster v3/v3.5 changes: grounded lie/sleep poses,
 9:16 over-zoom and phasing direction gates, the rebuilt ServerLore and Explainer
 templates, and Explainer's six physical metaphor props. See
 `docs/REMASTER-V3-CHANGELOG.md`.
+
+The v3.6 pass adds:
+
+- `Topics/ServerLore/REFERENCE-SCRIPTS.md` — both 50k+ reference transcripts, the
+  plain-English formula, banned AI-slop rewrites, and the 9-beat hook-to-CTA skeleton
+- `Topics/Explainer/REFERENCE-STUDY.md` — the Inflation reference's 8-step flow,
+  character motion, camera grammar, and seamless loop
+- `docs/COMPETITOR-STUDY-NEVER-WALK-ALONE.md` — full transcript, concrete-number
+  cadence study, and 4-layer payoff anatomy
+- Free `edge-tts` lock (never ElevenLabs), caption `y: 0.72` alignment, and two
+  direction-test camera fixes
 
 ## What was left out
 
