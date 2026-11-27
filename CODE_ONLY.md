@@ -2,8 +2,10 @@
 
 This repository is a **code-only mirror** of
 [`Mellow048/kmanincraftghhj22`](https://github.com/Mellow048/kmanincraftghhj22),
-taken from `main` at commit `1aceeba` ("Apply v3.6 reference-study pass and free TTS lock"),
-after the **Remaster v3/v3.5** upgrade in `9f0dd5b`.
+taken from `main` at commit `72db610` ("Fix --rate= flag in tts.yml and add
+em-dash/tnt words to narration.py"), after the Remaster v4 framework pass in
+`ba67946`, Remaster v3/v3.5 in `9f0dd5b`, and the v3.6 reference-study pass
+in `1aceeba`.
 
 It exists so the full source can be read, edited, and remastered without moving the
 4.1 GB of tracked media in the original repository.
@@ -37,6 +39,18 @@ The v3.6 pass adds:
   cadence study, and 4-layer payoff anatomy
 - Free `edge-tts` lock (never ElevenLabs), caption `y: 0.72` alignment, and two
   direction-test camera fixes
+
+## Remaster v4
+
+The v4 framework pass adds:
+
+- Edge-TTS default `+0%` and `0.42s` breath gaps between narration clips
+- Louder background music: InThisTown/Explainer `-13`, ServerLore `-12`
+- `cam.front` default `dist: 6.2` / `to: 4.4` for unclipped 9:16 framing
+- 3D text width clamping and extra pixel-font glyphs (`=`, `/`, `$`, `()`, `#`, `&`, `—`)
+- `docs/CRITIQUE-V4-QUALITY-GATES.md` and `SMALL-MODEL-RENDER-GUIDE.md`
+- Three Batch 2 film scaffolds: `taxes-explained-using-minecraft`,
+  `the-player-who-never-left-the-spawn-bench`, and `in-this-town-you-cant-drop-your-torch`
 
 ## What was left out
 
