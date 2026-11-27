@@ -2,9 +2,10 @@
 
 This repository is a **code-only mirror** of
 [`Mellow048/kmanincraftghhj22`](https://github.com/Mellow048/kmanincraftghhj22),
-taken from `main` at commit `5e299ad` ("Apply Remaster v5 reference standard"),
-after the Remaster v4 pass in `ba67946`, Batch 2 films in `ea23489`, Remaster
-v3/v3.5 in `9f0dd5b`, and the v3.6 reference-study pass in `1aceeba`.
+taken from `main` at commit `4b44809` ("Apply Remaster v7 final framework"),
+after the Remaster v5 pass in `5e299ad`, Remaster v4 in `ba67946`, Batch 2 films
+in `ea23489`, Remaster v3/v3.5 in `9f0dd5b`, and the v3.6 reference-study pass
+in `1aceeba`.
 
 It exists so the full source can be read, edited, and remastered without moving the
 4.1 GB of tracked media in the original repository.
@@ -59,6 +60,18 @@ The v4 framework pass adds:
 - `direction-report.mjs` hard gates for wall-spam, lazy cameras and static staging
 - `SMALL-MODEL-CHEATSHEET.md` and `docs/REMASTER-V5-REFERENCE-STANDARD.md`
 - Kept v4's `0.42s` TTS gap and the corrected clean-walk direction-test target
+
+## Remaster v7 (final)
+
+- `AGENTS.md` restored to the original storytelling-first director's contract:
+  `MASTERPROMPT-01.md` first, seven-beat spine, story readable with the sound off,
+  "stage the verb, then place the lens"
+- New engine layer: `src/engine/collision.tsx` (actor pushback, `SolidBox` camera
+  anti-clip) and `src/engine/Hud.tsx` (screen-space chat, clock, banner, subscribe)
+- `cam.fitDist9x16()` and `cam.frameDuo()` for 9:16-safe two-shots; richer
+  `press`/`fall`/`wave`/`hug`/`cheer` poses; camera-facing billboards
+- ServerLore starter no longer draws a scoreboard
+- Kept v4 TTS/BGM levels and the v5 direction hard gates
 
 ## What was left out
 
