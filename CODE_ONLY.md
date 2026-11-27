@@ -2,7 +2,8 @@
 
 This repository is a **code-only mirror** of
 [`Mellow048/kmanincraftghhj22`](https://github.com/Mellow048/kmanincraftghhj22),
-taken from `main` at commit `1c4aa36` ("Overhaul in-this-town-we-live-at-the-bottom via teamwork").
+taken from `main` at commit `7a8aa4b` ("Remove stale DEEPSEEK-MASTERPROMPT.md token bloat"),
+after the **Remaster v3/v3.5** upgrade in `9f0dd5b`.
 
 It exists so the full source can be read, edited, and remastered without moving the
 4.1 GB of tracked media in the original repository.
@@ -19,6 +20,12 @@ The three remaster targets are included in full:
 
 Every film under `src/videos/` that uses those packs is included too, along with the
 shared engine (`src/engine/`), scripts, tests, docs, and GitHub Actions workflows.
+
+This snapshot includes the Remaster v3/v3.5 changes: grounded lie/sleep poses,
+`cam.front` / `cam.twoShot` / `cam.fitWidth`, the new back-of-character, blocking,
+9:16 over-zoom and phasing direction gates, the rebuilt ServerLore and Explainer
+templates, and Explainer's six physical metaphor props. See
+`docs/REMASTER-V3-CHANGELOG.md`.
 
 ## What was left out
 
