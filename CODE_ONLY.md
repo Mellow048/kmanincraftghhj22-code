@@ -2,9 +2,8 @@
 
 This repository is a **code-only mirror** of
 [`Mellow048/kmanincraftghhj22`](https://github.com/Mellow048/kmanincraftghhj22),
-taken from `main` at commit `7a8aa4b` ("Remove stale DEEPSEEK-MASTERPROMPT.md token bloat"),
-after the **Remaster v3/v3.5** upgrade in `9f0dd5b`, plus the **v3.6 reference-study
-pass**.
+taken from `main` at commit `1aceeba` ("Apply v3.6 reference-study pass and free TTS lock"),
+after the **Remaster v3/v3.5** upgrade in `9f0dd5b`.
 
 It exists so the full source can be read, edited, and remastered without moving the
 4.1 GB of tracked media in the original repository.
