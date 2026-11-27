@@ -2,10 +2,9 @@
 
 This repository is a **code-only mirror** of
 [`Mellow048/kmanincraftghhj22`](https://github.com/Mellow048/kmanincraftghhj22),
-taken from `main` at commit `72db610` ("Fix --rate= flag in tts.yml and add
-em-dash/tnt words to narration.py"), after the Remaster v4 framework pass in
-`ba67946`, Remaster v3/v3.5 in `9f0dd5b`, and the v3.6 reference-study pass
-in `1aceeba`.
+taken from `main` at commit `5e299ad` ("Apply Remaster v5 reference standard"),
+after the Remaster v4 pass in `ba67946`, Batch 2 films in `ea23489`, Remaster
+v3/v3.5 in `9f0dd5b`, and the v3.6 reference-study pass in `1aceeba`.
 
 It exists so the full source can be read, edited, and remastered without moving the
 4.1 GB of tracked media in the original repository.
@@ -51,6 +50,15 @@ The v4 framework pass adds:
 - `docs/CRITIQUE-V4-QUALITY-GATES.md` and `SMALL-MODEL-RENDER-GUIDE.md`
 - Three Batch 2 film scaffolds: `taxes-explained-using-minecraft`,
   `the-player-who-never-left-the-spawn-bench`, and `in-this-town-you-cant-drop-your-torch`
+
+## Remaster v5
+
+- New camera recipes `cam.track`, `cam.sweep`, `cam.heroLow`, `cam.streetOverview`
+  and the `moveBetween()` locomotion helper
+- `<VillageStreet>` multi-angle street set, `CitizenLead` variants, `MoneyPrinter`
+- `direction-report.mjs` hard gates for wall-spam, lazy cameras and static staging
+- `SMALL-MODEL-CHEATSHEET.md` and `docs/REMASTER-V5-REFERENCE-STANDARD.md`
+- Kept v4's `0.42s` TTS gap and the corrected clean-walk direction-test target
 
 ## What was left out
 
